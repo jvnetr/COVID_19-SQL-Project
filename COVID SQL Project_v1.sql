@@ -39,6 +39,14 @@ Where continent is not null
 Group by location
 Order by TotalDeathCount desc
 
+/*This query summed the total deaths in each continent. European Union is part of Europe*/
+Select location, SUM(cast(new_deaths as int)) as TotalDeathCount
+From CovidDeaths
+Where continent is null
+and location not in ('World', 'European Union', 'International')
+Group by location
+Order by TotalDeathCount desc
+
 /*This query categorizes by continent from highest death to lowest death counts*/
 Select continent, MAX(cast(total_deaths as int)) as TotalDeathCount
 From [Covid Project]..CovidDeaths
